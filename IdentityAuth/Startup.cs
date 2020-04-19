@@ -12,6 +12,7 @@ using IdentityAuth.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using IdentityAuth.Models;
 
 namespace IdentityAuth
 {
@@ -31,7 +32,7 @@ namespace IdentityAuth
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
                     
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
