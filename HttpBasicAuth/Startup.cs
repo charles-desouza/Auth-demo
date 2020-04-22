@@ -1,13 +1,13 @@
 ﻿using HttpBasicAuth.Middleware;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Hosting;
 
 namespace HttpBasicAuth
 {
-  public class Startup
+    public class Startup
   {
     public Startup(IConfiguration configuration)
     {
@@ -19,11 +19,12 @@ namespace HttpBasicAuth
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      services.AddControllersWithViews();
+      services.AddRazorPages();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       app.UseBasicAuthentication();
 
@@ -38,7 +39,11 @@ namespace HttpBasicAuth
       }
 
       app.UseHttpsRedirection();
-      app.UseMvc();
+      
+      app.UseEndpoints(endpoints =>
+      {
+          endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+      });
     }
   }
 }
