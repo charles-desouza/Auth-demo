@@ -29,7 +29,7 @@ namespace HttpBasicAuth.Middleware
     public async Task Invoke(HttpContext context)
     {
       string authHeader = context.Request.Headers["Authorization"];
-      if (authHeader != null && authHeader.StartsWith("Basic "))
+        
       {
         // Get the encoded username and password
         var encodedUsernamePassword = authHeader.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries)[1]?.Trim();
