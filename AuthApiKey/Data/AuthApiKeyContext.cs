@@ -1,8 +1,10 @@
+using AuthApiKey.Model;
+
 namespace AuthApiKey.Data
 {
     public class AuthApiKeyContext: DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public AuthApiKeyContext(DbContextOptions<AuthApiKeyContext> options)
             : base(options)
         {
         }
