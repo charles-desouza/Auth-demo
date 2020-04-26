@@ -10,6 +10,9 @@ namespace AuthApiKey.Model
 
         public DateTime Created { get; set; }
         public DateTime LastUsed { get; set; }
-        
+
+        public IList<UserRole> UserRoles { get; set; }
+
+
     }
 }
