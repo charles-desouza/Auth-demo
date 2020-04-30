@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AuthApiKey.Data;
+using AuthApiKey.Extensions;
 
 namespace AuthApiKey
 {
@@ -24,6 +25,13 @@ namespace AuthApiKey
         {
         services.AddDbContext<AuthApiKeyContext>(options =>options.UseSqlite(
                         Configuration.GetConnectionString("DefaultConnection")));
+
+                        services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+        options.DefaultChallengeScheme = ApiKeyAuthenticationOptions.DefaultScheme;
+    })
+    .AddApiKeySupport(options => {});
 
             services.AddControllers();
         }
