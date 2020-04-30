@@ -5,6 +5,16 @@ namespace AuthApiKey.Model
 {
     public class UserLogin
     {
+        // public UserLogin(int id, string apiKey, string owner, bool disabled, DateTime created, DateTime lastUsed)
+        // {
+        //     this.Id = id;
+        //     this.ApiKey = apiKey;
+        //     this.Owner = owner;
+        //     this.Disabled = disabled;
+        //     this.Created = created;
+        //     this.LastUsed = lastUsed;
+
+        // }
         public int Id { get; set; }
 
         public string ApiKey { get; set; }
