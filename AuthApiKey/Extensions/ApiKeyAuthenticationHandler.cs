@@ -48,7 +48,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
                 new Claim(ClaimTypes.Name, existingApiKey.Owner)
             };
 
-            claims.AddRange(existingApiKey.UserRoles.Select(role => new Claim(ClaimTypes.Role, role)));
+            claims.AddRange(existingApiKey.UserRoles.Select(role => new Claim(ClaimTypes.Role, role.Name)));
 
             var identity = new ClaimsIdentity(claims, Options.AuthenticationType);
             var identities = new List<ClaimsIdentity> { identity };
@@ -67,7 +67,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
         Response.ContentType = ProblemDetailsContentType;
         var problemDetails = new UnauthorizedProblemDetails();
 
-        await Response.WriteAsync(JsonSerializer.Serialize(problemDetails, DefaultJsonSerializerOptions.Options));
+        await Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
     }
 
     protected override async Task HandleForbiddenAsync(AuthenticationProperties properties)
@@ -76,7 +76,7 @@ public class ApiKeyAuthenticationHandler : AuthenticationHandler<ApiKeyAuthentic
         Response.ContentType = ProblemDetailsContentType;
         var problemDetails = new ForbiddenProblemDetails();
 
-        await Response.WriteAsync(JsonSerializer.Serialize(problemDetails, DefaultJsonSerializerOptions.Options));
+        await Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
     }
 }
 }
