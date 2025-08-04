@@ -1,13 +1,14 @@
 ﻿using JwtAuth.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace JwtAuth.Data
 {
-  public class AppIdentityDbContext : IdentityDbContext<ApplicationUser>
+  public class AppIdentityDbContext : DbContext
   {
-    public AppIdentityDbContext(DbContextOptions options) : base(options)
+    public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
     {
     }
+
+    public DbSet<ApplicationUser> ApplicationUsers { get; set; }
   }
 }
